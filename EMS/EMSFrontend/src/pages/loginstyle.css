@@ -1,0 +1,121 @@
+/* Full-page background with image and gradient overlay */
+.loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('public/images/loginbackground.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .loginPage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    z-index: -1;
+  }
+  
+  /* Form container with box shadow and rounded corners */
+  .loginFormContainer {
+    background-color: rgba(255, 255, 255, 0.85); /* Transparent background for the form */
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  
+  /* Form labels and inputs for floating effect */
+  .formInputGroup {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  
+  .formInputGroup input {
+    width: 100%;
+    padding: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .formInputGroup input:focus {
+    border-color: #6e7dff;
+    outline: none;
+    background-color: #fff;
+  }
+  
+  .formInputGroup label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 14px;
+    color: #888;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .formInputGroup input:focus + label,
+  .formInputGroup input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
+    color: #6e7dff;
+  }
+  
+  /* Styling for the button */
+  button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #6e7dff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #5e58b8;
+  }
+  
+  /* Terms & Conditions Checkbox */
+  .termsCheckbox {
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .termsCheckbox input {
+    margin-right: 10px;
+  }
+  
+  .termsCheckbox a {
+    color: #6e7dff;
+  }
+  
+  .termsCheckbox a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Error message styling */
+  .text-danger {
+    color: #e74c3c;
+    font-size: 14px;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 576px) {
+    .loginFormContainer {
+      padding: 30px;
+      width: 90%;
+    }
+  }
