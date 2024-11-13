@@ -1,10 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import authRouter from './Routes/auth.js'
+import connectToDatabase from './db/db.js'
 
+connectToDatabase()
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use('/api/auth', authRouter)
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGODB_URI, {
