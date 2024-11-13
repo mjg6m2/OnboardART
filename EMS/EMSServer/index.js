@@ -25,3 +25,5 @@ mongoose.connect(process.env.MONGODB_URI, {
         console.error("MongoDB connection error:", err);
         process.exit(1); // Exit the app if the database connection fails
     });
+
+    
