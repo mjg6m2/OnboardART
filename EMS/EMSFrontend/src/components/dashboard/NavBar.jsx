@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAuth } from '../../context/authContext.jsx'
 
 const Navbar = () => {
       const {user} = useAuth()

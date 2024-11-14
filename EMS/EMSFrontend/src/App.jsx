@@ -5,7 +5,7 @@ import EmployeeDashboard from './pages/EmployeeDashboard';
 import PrivateRoutes from './utils/PrivateRoutes';
 import RoleBasedRoutes from './utils/RoleBasedRoutes';
 import AdminSummary from './components/dashboard/AdminSummary';
-import DepartmentList from '.components/departments';
+import DepartmentList from './components/departments/DepartmentList.jsx';
 
 
 
