@@ -16,4 +16,4 @@ const RoleBasedRoutes = ({children, requiredRole}) => {
 
 }
 
-export defualt RoleBasedRoutes
+export default RoleBasedRoutes
