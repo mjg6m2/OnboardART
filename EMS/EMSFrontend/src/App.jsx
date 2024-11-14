@@ -12,11 +12,23 @@ function App() {
   <Routes>
     <Route path="/" element={<Navigate to="/admin-dashboard" />}></Route>
     <Route path="/login" element={<Login />}></Route>
-    <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
+    <Route path="/admin-dashboard" element={
+      <PrivateRoutes>
+        <RoleBaseRoutes requiredRole = {["admin"]}>
+          <AdminDashboard />
+        </RoleBaseRoutes>
+      </PrivateRoutes>
+
+      }>
+        <Route index element = {<AdminSummary/>}></Route>
+
+        <Route path = "/admin-dashboard/department" element = {<DepartmentList/>}></Route>
+      
+      </Route>
     <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
   </Routes>
   </BrowserRouter>
- )
+ );
 }
 
-export default App
+export default App;
