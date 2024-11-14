@@ -6,8 +6,8 @@ email: {type: String, required: true},
 password: {type: String, required: true},
 role: {type: String, enum: ["admin", "employee"], required: true},
 profilePic: {type: String},
-createAt: {type: Date, default Date.now},
-updateAt: {type: Date, default Date.now},
+createAt: {type: Date, default: Date.now},
+updateAt: {type: Date, default: Date.now},
 })
 
 const User = mongoose.model("User", userSchema)
