@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../context/authContext'
-import Navbar from '../components/dashboard/Navbar'
+import Navbar from '../components/dashboard/NavBar'
 import AdminSidebar from '../components/dashboard/AdminSidebar'
 import AdminSummary from '../components/dashboard/AdminSummary'
 import {Outlet} from 'react-router-dom'
