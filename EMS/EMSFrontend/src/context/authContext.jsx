@@ -5,13 +5,13 @@ const UserContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const verifyUser = async () => {
             try {
-                const token = localStorage.getItem('token')
-              if(token) {
+                const token = localStorage.getItem('token');
+                if(token) {
                 const response = await axios.get(
                     "http://localhost:3000/api/auth/verify", 
                     {
@@ -20,24 +20,24 @@ export const AuthProvider = ({ children }) => {
                       },
                     }
                 );
-                console.log(response)
+                console.log("User data:", response.data.user);
                 if(response.data.success) {
                     setUser(response.data.user);
                 }
             } else {
                 setUser(null);
-                setLoading(false)
+               // setLoading(false)
             }
             } catch(error) {
-                console.log(error)
+                console.log("Verification error:", error);
                 if(error.response && !error.response.data.error) {
-                    setUser(null)
+                    setUser(null);
                 }
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         }
-        verifyUser()
+        verifyUser();
     }, []) 
 
     const login = (user) => {
