@@ -1,4 +1,6 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/authContext'; // Import AuthProvider
 import Login from "./pages/Login";
 import AdminDashboard from './pages/AdminDashboard';
 import EmployeeDashboard from './pages/EmployeeDashboard';
@@ -11,6 +13,7 @@ import EditDepartment from './components/departments/EditDepartment.jsx';
 
 function App() {
   return (
+   <AuthProvider>
     <BrowserRouter>
       <Routes>
         {/* Redirect from root to admin dashboard */}
@@ -40,6 +43,7 @@ function App() {
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
       </Routes>
     </BrowserRouter>
+  </AuthProvider>
   );
 }
 
