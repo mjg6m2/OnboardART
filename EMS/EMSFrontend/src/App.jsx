@@ -6,7 +6,9 @@ import PrivateRoutes from './utils/PrivateRoutes';
 import RoleBasedRoutes from './utils/RoleBasedRoutes';
 import AdminSummary from './components/dashboard/AdminSummary';
 import DepartmentList from './components/departments/DepartmentList.jsx';
-
+import RoleBasedRoutes from './utils/RoleBasedRoutes';
+import Summary from './components/employeeDashboard/Summary'
+import View from './components/employee/View'
 
 
 function App() {
@@ -29,8 +31,22 @@ function App() {
         <Route path = "/admin-dashboard/department" element = {<DepartmentList/>}></Route>
       
       </Route>
-    <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
-  </Routes>
+    <Route 
+      path="/employee-dashboard" 
+      element={
+        <PrivateRoutes>
+          <RoleBasedRoutes requiredRole={["admin", "employee"]}>
+            <EmployeeDashboard />
+          </RoleBasedRoutes>
+      </PrivateRoutes>
+      }
+    >
+      <Route index element = {<Summary/>}></Route>
+      
+      <Route> path="/employee-dashboard/profile/:id" element={<View/>}</Route>
+
+    </Route>
+   </Routes>
   </BrowserRouter>
  );
 }
