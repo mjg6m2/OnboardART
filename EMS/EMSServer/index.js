@@ -1,31 +1,24 @@
 import express from 'express'
 import cors from 'cors'
-import mongoose from 'mongoose'
 import authRouter from './Routes/auth.js'
-import connectToDatabase from './db/db.js'
 import departmentRouter from './Routes/department.js'
+import employeeRouter from './Routes/employee.js'
+import dashboardRouter from './Routes/dashboard.js'
+import connectToDatabase from './db/db.js'
 
-connectToDatabase()
-const app = express()
+connectToDatabase() 
+const app = express() 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('public/uploads'))
 app.use('/api/auth', authRouter)
 app.use('/api/department', departmentRouter)
+app.use('/api/employee', employeeRouter)
+app.use('/api/dashboard', dashboardRouter)
 
-// Connect to MongoDB and start the server
-mongoose.connect(process.env.MONGODB_URI, {
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true
+app.listen(process.env.PORT, () => {
+    console.log(`Server is Running on port ${process.env.PORT}`)
 })
-    .then(() => {
-        console.log("Connected to MongoDB");
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`);
-        });
-    })
-    .catch(err => {
-        console.error("MongoDB connection error:", err);
-        process.exit(1); // Exit the app if the database connection fails
-    });
+
 
     
