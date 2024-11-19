@@ -3,6 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import authRouter from './Routes/auth.js'
 import timeOffRouter from '.routes/timeOff.js'
+import settingRouter from '.routes/setting.js'
 import connectToDatabase from './db/db.js'
 
 connectToDatabase()
@@ -11,6 +12,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/api/auth', authRouter)
 app.use('/api/time-off', timeOffRouter)
+app.use('/api/setting', settingRouter)
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGODB_URI, {

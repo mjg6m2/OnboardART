@@ -30,7 +30,7 @@ const Sidebar = () => {
                     <span>Time Off</span>
                 </NavLink>
                 
-                <NavLink to="/employee-dashboard/salary"
+                <NavLink to={`/employee-dashboard/salary/${user._id}`}
                      className = {({isActive}) => `${isActive ? "bg-teal-500" : " "} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
                     <FaCalendarAlt />
                     <span>Salary</span>

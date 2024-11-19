@@ -11,6 +11,7 @@ import Summary from './components/employeeDashboard/Summary'
 import View from './components/employee/View'
 import TOList from './components/timeOff/TOList.jsx';
 import Request from './components/timeOff/Request.jsx';
+import Setting from './components/employeeDashboard/Setting.jsx';
 
 
 function App() {
@@ -45,9 +46,12 @@ function App() {
     >
       <Route index element = {<Summary/>}></Route>
       
-      <Route> path="/employee-dashboard/profile/:id" element={<View/>}</Route>
-      <Route> path="/employee-dashboard/time-off" element={<TOList/>}</Route>
-      <Route> path="/employee-dashboard/request-time-off" element={<Request/>}</Route>
+      <Route path="/employee-dashboard/profile/:id" element={<View/>}></Route>
+      <Route path="/employee-dashboard/time-off" element={<TOList/>}></Route>
+      <Route path="/employee-dashboard/request-time-off" element={<Request/>}></Route>
+      <Route path="/employee-dashboard/salary/:id" element={<ViewSalary/>}></Route>
+      <Route path="/employee-dashboard/setting" elements={<Setting />}></Route>
+
 
     </Route>
    </Routes>
