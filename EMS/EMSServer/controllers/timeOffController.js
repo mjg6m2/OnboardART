@@ -24,4 +24,17 @@ const reqTimeOff = async (req, res) => {
 
 }
 
-export {reqTimeOff}
+const getTimeOff = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const employee = await Employee.findOne({userID: id})
+
+        const timeOff = await TimeOff.find({employeeID: employee._id})
+        return res.status(200).json({succes: true, timeOff})
+    } catch(error) {
+        console.log(error.message)
+        return res.status(500).json({success: false, error: "time off add server error"})
+    }
+}
+
+export {reqTimeOff, getTimeOff}

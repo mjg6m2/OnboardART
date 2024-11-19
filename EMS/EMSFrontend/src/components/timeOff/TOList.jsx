@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/authContext';
+import axios from 'axios';
 
 const TOList = () => {
+  const {user} = useAuth()
+  const [timeOff, setTimeOff] = useStates([])
+  let sno = 1;
+  
     return (
         <div className = 'p-6'>
             <div className = "text-center">
@@ -20,6 +26,7 @@ const TOList = () => {
                 Request Time Off
             </Link>
         </div>
+        //Add table from ../salary/View.jsx here! See video 7 48:00
     </div>
   )
 }
