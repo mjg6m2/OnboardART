@@ -34,12 +34,15 @@ const AdminSidebar = () => {
                     <FaCalendarAlt />
                     <span>Time Off</span>
                 </NavLink>
+
+                {/* Single Onboarding Tasks Tab */}
                 <NavLink
                     to="/admin-dashboard/onboarding"
                     className={({ isActive }) => `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
                     <FaMoneyBillWaveAlt />
                     <span>Onboarding Tasks</span>
                 </NavLink>
+
                 <NavLink
                     to="/admin-dashboard/settings"
                     className={({ isActive }) => `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
