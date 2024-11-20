@@ -35,10 +35,10 @@ const AdminSidebar = () => {
                     <span>Time Off</span>
                 </NavLink>
                 <NavLink
-                    to="/admin-dashboard/salary"
+                    to="/admin-dashboard/onboarding"
                     className={({ isActive }) => `${isActive ? "bg-teal-500" : ""} flex items-center space-x-4 block py-2.5 px-4 rounded`}>
                     <FaMoneyBillWaveAlt />
-                    <span>Salary</span>
+                    <span>Onboarding Tasks</span>
                 </NavLink>
                 <NavLink
                     to="/admin-dashboard/settings"
