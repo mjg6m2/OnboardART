@@ -1,23 +1,22 @@
-// AdminDashboard.jsx
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import AdminSidebar from '../components/dashboard/AdminSidebar';
-import Navbar from '../components/dashboard/NavBar';
+import React from 'react'
+import { useAuth } from '../context/authContext'
+import AdminSidebar from '../components/dashboard/AdminSidebar'
+import Navbar from '../components/dashboard/Navbar'
+import AdminSummary from '../components/dashboard/AdminSummary'
+import { Outlet } from 'react-router-dom'
 
 const AdminDashboard = () => {
+  const {user} = useAuth()
+ 
   return (
-    <div className="flex">
+    <div className='flex'>
       <AdminSidebar />
-      <div className="flex-1 ml-64 bg-gray-100">
+      <div className='flex-1 ml-64 bg-gray-100 h-screen'>
         <Navbar />
-        <div className="p-4">
-          {/* This will show the nested routes */}
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminDashboard;
-
+export default AdminDashboard
