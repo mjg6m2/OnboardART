@@ -17,6 +17,8 @@ import Setting from "./components/EmployeeDashboard/Setting";
 import AddOnboarding from "./components/onboarding/AddOnboarding";
 import EditOnboarding from "./components/onboarding/EditOnboarding";
 import OnboardingList from "./components/onboarding/OnboardingList";
+import TOList from './components/timeOff/TOList.jsx';
+import Request from './components/timeOff/Request.jsx';
 
 function App() {
   return (
@@ -49,34 +51,49 @@ function App() {
           <Route path="employees/:id" element={<View />}></Route>
           <Route path="employees/edit/:id" element={<Edit />}></Route>
 
-          <Route path="setting" element={<Setting />}></Route>
+  return (
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Navigate to="/admin-dashboard" />}></Route>
+    <Route path="/login" element={<Login />}></Route>
+    <Route path="/admin-dashboard" element={
+      <PrivateRoutes>
+        <RoleBasedRoutes requiredRole = {["admin"]}>
+          <AdminDashboard />
+        </RoleBasedRoutes>
+      </PrivateRoutes>
 
-          {/* Onboarding Routes - Nested under Admin Dashboard */}
-          <Route path="onboarding" element={<OnboardingList />} />
-          <Route path="onboarding/add" element={<AddOnboarding />} />
-          <Route path="onboarding/edit/:id" element={<EditOnboarding />} />
+      }>
+        <Route index element = {<AdminSummary/>}></Route>
 
-        </Route>
+        <Route path = "/admin-dashboard/department" element = {<DepartmentList/>}></Route>
+      
+      </Route>
+    <Route 
+      path="/employee-dashboard" 
+      element={
+        <PrivateRoutes>
+          <RoleBasedRoutes requiredRole={["admin", "employee"]}>
+            <EmployeeDashboard />
+          </RoleBasedRoutes>
+      </PrivateRoutes>
+      }
+    >
+      <Route index element = {<Summary/>}></Route>
+      
+      <Route path="/employee-dashboard/profile/:id" element={<View/>}></Route>
+      <Route path="/employee-dashboard/time-off" element={<TOList/>}></Route>
+      <Route path="/employee-dashboard/request-time-off" element={<Request/>}></Route>
+      <Route path="onboarding" element={<OnboardingList />} />
+      <Route path="onboarding/add" element={<AddOnboarding />} />
+      <Route path="onboarding/edit/:id" element={<EditOnboarding />} />
+      <Route path="/employee-dashboard/setting" elements={<Setting />}></Route>
 
-        {/* Employee Dashboard Routes */}
-        <Route
-          path="/employee-dashboard"
-          element={
-            <PrivateRoutes>
-              <RoleBaseRoutes requiredRole={["admin", "employee"]}>
-                <EmployeeDashboard />
-              </RoleBaseRoutes>
-            </PrivateRoutes>
-          }
-        >
-          <Route index element={<Summary />}></Route>
 
-          <Route path="profile/:id" element={<View />}></Route>
-          <Route path="setting" element={<Setting />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+    </Route>
+   </Routes>
+  </BrowserRouter>
+ );
 }
 
 export default App;
