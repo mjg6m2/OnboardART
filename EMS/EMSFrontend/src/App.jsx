@@ -12,8 +12,11 @@ import List from "./components/employee/List";
 import Add from "./components/employee/Add";
 import View from "./components/employee/View";
 import Edit from "./components/employee/Edit";
-import Summary from './components/EmployeeDashboard/Summary'
+import Summary from './components/EmployeeDashboard/Summary';
 import Setting from "./components/EmployeeDashboard/Setting";
+import AddOnboarding from "./components/onboarding/AddOnboarding";
+import EditOnboarding from "./components/onboarding/EditOnboarding";
+import OnboardingList from "./components/onboarding/OnboardingList";
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/admin-dashboard" />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        
+        {/* Admin Dashboard Routes */}
         <Route
           path="/admin-dashboard"
           element={
@@ -33,32 +38,27 @@ function App() {
         >
           <Route index element={<AdminSummary />}></Route>
 
-          <Route
-            path="/admin-dashboard/departments"
-            element={<DepartmentList />}
-          ></Route>
-          <Route
-            path="/admin-dashboard/add-department"
-            element={<AddDepartment />}
-          ></Route>
-          <Route
-            path="/admin-dashboard/department/:id"
-            element={<EditDepartment />}
-          ></Route>
+          {/* Department Routes */}
+          <Route path="departments" element={<DepartmentList />}></Route>
+          <Route path="add-department" element={<AddDepartment />}></Route>
+          <Route path="department/:id" element={<EditDepartment />}></Route>
 
-          <Route path="/admin-dashboard/employees" element={<List />}></Route>
-          <Route path="/admin-dashboard/add-employee" element={<Add />}></Route>
-          <Route
-            path="/admin-dashboard/employees/:id"
-            element={<View />}
-          ></Route>
-          <Route
-            path="/admin-dashboard/employees/edit/:id"
-            element={<Edit />}
-          ></Route>
+          {/* Employee Routes */}
+          <Route path="employees" element={<List />}></Route>
+          <Route path="add-employee" element={<Add />}></Route>
+          <Route path="employees/:id" element={<View />}></Route>
+          <Route path="employees/edit/:id" element={<Edit />}></Route>
 
-          <Route path="/admin-dashboard/setting" element={<Setting />}></Route>
+          <Route path="setting" element={<Setting />}></Route>
+
+          {/* Onboarding Routes - Nested under Admin Dashboard */}
+          <Route path="onboarding" element={<OnboardingList />} />
+          <Route path="onboarding/add" element={<AddOnboarding />} />
+          <Route path="onboarding/edit/:id" element={<EditOnboarding />} />
+
         </Route>
+
+        {/* Employee Dashboard Routes */}
         <Route
           path="/employee-dashboard"
           element={
@@ -71,9 +71,8 @@ function App() {
         >
           <Route index element={<Summary />}></Route>
 
-          <Route path="/employee-dashboard/profile/:id" element={<View />}></Route>
-          <Route path="/employee-dashboard/setting" element={<Setting />}></Route>
-
+          <Route path="profile/:id" element={<View />}></Route>
+          <Route path="setting" element={<Setting />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
