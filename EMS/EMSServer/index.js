@@ -2,8 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import authRouter from './Routes/auth.js'
-import timeOffRouter from '.routes/timeOff.js'
-import settingRouter from '.routes/setting.js'
+import timeOffRouter from './Routes/timeOff.js'
+import settingRouter from './Routes/setting.js'
 import connectToDatabase from './db/db.js'
 
 connectToDatabase()
