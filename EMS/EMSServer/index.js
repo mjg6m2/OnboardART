@@ -4,6 +4,10 @@ import mongoose from 'mongoose'
 import authRouter from './Routes/auth.js'
 import timeOffRouter from './Routes/timeOff.js'
 import settingRouter from './Routes/setting.js'
+import departmentRouter from './Routes/department.js';
+import employeeRouter from './Routes/employee.js';
+import dashboardRouter from './Routes/dashboard.js';
+import onboardingRouter from './Routes/onboarding.js';
 import connectToDatabase from './db/db.js'
 
 connectToDatabase()
@@ -13,21 +17,16 @@ app.use(express.json())
 app.use('/api/auth', authRouter)
 app.use('/api/time-off', timeOffRouter)
 app.use('/api/setting', settingRouter)
+app.use('/api/department', departmentRouter);
+app.use('/api/employee', employeeRouter);
+app.use('/api/dashboard', dashboardRouter);
+app.use('/api/onboarding', onboardingRouter);
 
-// Connect to MongoDB and start the server
-mongoose.connect(process.env.MONGODB_URI, {
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true
-})
-    .then(() => {
-        console.log("Connected to MongoDB");
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`);
-        });
-    })
-    .catch(err => {
-        console.error("MongoDB connection error:", err);
-        process.exit(1); // Exit the app if the database connection fails
-    });
+app.use(express.static('public/uploads'));
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is Running on port ${process.env.PORT}`);
+});
+
 
     

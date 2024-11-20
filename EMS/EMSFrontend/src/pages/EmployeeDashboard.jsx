@@ -5,13 +5,13 @@ import Navbar from '../components/dashboard/Navbar'
 
 const EmployeeDashboard = () => {
   return (
-    <div className = 'flex'>
-    <Sidebar/>
-    <div className = 'flex-1 m1-64 bg-gray-100 h-screen'>
-      <Navbar/>
-      <Outlet/>
+    <div className='flex'>
+      <Sidebar />
+      <div className='flex-1 ml-64 bg-gray-100 h-screen'>
+        <Navbar />
+        <Outlet />
+      </div>
     </div>
-  </div>
   )
 }
 
