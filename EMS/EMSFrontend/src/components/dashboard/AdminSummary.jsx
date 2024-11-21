@@ -13,6 +13,7 @@ import axios from 'axios';
 
 const AdminSummary = () => {
   const [summary, setSummary] = useState(null);
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -22,16 +23,20 @@ const AdminSummary = () => {
             "Authorization" : `Bearer ${localStorage.getItem('token')}`
           }
         });
-        console.log(summary.data);
         setSummary(summary.data);
-      } catch(error) {
-        if(error.response) {
+      } catch (error) {
+        if (error.response) {
           alert(error.response.data.error);
         }
-        console.log(error.message);
+        console.error(error.message);
       }
     };
     fetchSummary();
+
+    // Set the current date
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    setCurrentDate(today.toLocaleDateString('en-US', options));
   }, []);
 
   if (!summary) {
@@ -46,9 +51,13 @@ const AdminSummary = () => {
   }
 
   return (
-    <div className="p-6">
-      <h3 className="text-2xl font-bold">Dashboard Overview</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+    <div className="p-8 bg-[#F4F2F8] min-h-screen">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-3xl font-semibold text-[#58536E]">Dashboard Overview</h3>
+        <span className="text-[#58536E] font-semibold text-lg">{currentDate}</span>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <SummaryCard
           icon={<FaUsers />}
           text="Total Employees"
@@ -70,8 +79,7 @@ const AdminSummary = () => {
       </div>
 
       <div className="mt-12">
-        <h4 className="text-center text-2xl font-bold">Leave Details</h4>
-
+        <h4 className="text-center text-2xl font-semibold text-[#58536E]">Leave Details</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <SummaryCard
             icon={<FaFileAlt />}
