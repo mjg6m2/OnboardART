@@ -1,72 +1,116 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css"; // Don't forget to import the CSS
 
 const OnboardingTasks = () => {
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState("");
-  const [loading, setLoading] = useState(false);  // Loading state
+  const [taskName, setTaskName] = useState('');
+  const [assignedTo, setAssignedTo] = useState('');
+  const [assignedToDepartment, setAssignedToDepartment] = useState('');
+  const [dueDate, setDueDate] = useState(null);
 
-  const addTask = () => {
-    if (task) {
-      setTasks([...tasks, { taskName: task, assignedTo: "Employee Name" }]);
-      setTask("");
-    }
+  // Hardcoded employees and departments (for now, just placeholders)
+  const employees = [
+    { _id: '1', name: 'John Doe' },
+    { _id: '2', name: 'Jane Smith' },
+  ];
+
+  const departments = [
+    { _id: '1', name: 'HR' },
+    { _id: '2', name: 'Engineering' },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Placeholder action on submit
+    alert(`Task: ${taskName} has been assigned to ${assignedTo} in the ${assignedToDepartment} department! Due on ${dueDate}`);
+    // Reset form after submit
+    setTaskName('');
+    setAssignedTo('');
+    setAssignedToDepartment('');
+    setDueDate(null);
   };
-
-  // Simulate loading tasks (e.g., fetch from an API)
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setLoading(true); // Set loading to true when starting to fetch
-      // Simulate data fetching delay
-      setTimeout(() => {
-        setTasks([{ taskName: "Task 1", assignedTo: "Employee 1" }]);
-        setLoading(false); // Set loading to false once tasks are loaded
-      }, 2000);
-    };
-
-    fetchTasks();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-[#F4F2F8]">
-        <div className="flex flex-col items-center">
-          <div className="spinner-border animate-spin h-8 w-8 border-4 border-t-[#58536E] border-[#F4F2F8] rounded-full mb-4"></div>
-          <p className="text-xl font-semibold text-[#58536E]">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="p-6">
-      <h3 className="text-2xl font-bold">Onboarding Tasks</h3>
-      <div className="my-4">
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          placeholder="Enter task"
-          className="border px-4 py-2 rounded-md"
-        />
-        
+      <h3 className="text-2xl font-semibold mb-4">Add Onboarding Task</h3>
+      <form onSubmit={handleSubmit}>
+        {/* Task Name Input */}
+        <div className="mb-4">
+          <label htmlFor="taskName" className="block text-lg font-semibold">
+            Task Name
+          </label>
+          <input
+            type="text"
+            id="taskName"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            placeholder="Enter task name"
+            className="mt-2 p-2 border rounded-md w-full"
+          />
+        </div>
+
+        {/* Assign to Employee Dropdown */}
+        <div className="mb-4">
+          <label htmlFor="assignedTo" className="block text-lg font-semibold">
+            Assign to Employee
+          </label>
+          <select
+            id="assignedTo"
+            value={assignedTo}
+            onChange={(e) => setAssignedTo(e.target.value)}
+            className="mt-2 p-2 border rounded-md w-full"
+          >
+            <option value="">Select Employee</option>
+            {employees.map((employee) => (
+              <option key={employee._id} value={employee._id}>
+                {employee.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Assign to Department Dropdown */}
+        <div className="mb-4">
+          <label htmlFor="assignedToDepartment" className="block text-lg font-semibold">
+            Assign to Department
+          </label>
+          <select
+            id="assignedToDepartment"
+            value={assignedToDepartment}
+            onChange={(e) => setAssignedToDepartment(e.target.value)}
+            className="mt-2 p-2 border rounded-md w-full"
+          >
+            <option value="">Select Department</option>
+            {departments.map((dept) => (
+              <option key={dept._id} value={dept._id}>
+                {dept.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Due Date Picker */}
+        <div className="mb-4">
+          <label htmlFor="dueDate" className="block text-lg font-semibold">
+            Due Date
+          </label>
+          <DatePicker
+            selected={dueDate}
+            onChange={(date) => setDueDate(date)}
+            dateFormat="MMMM d, yyyy"
+            className="mt-2 p-2 border rounded-md w-full"
+            placeholderText="Select due date"
+          />
+        </div>
+
+        {/* Submit Button */}
         <button
-          onClick={addTask}
-          className="ml-2 px-4 py-2 bg-[#6B7DFF] hover:bg-[#4A61C1] text-white rounded-md shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded-md"
         >
           Add Task
         </button>
-      </div>
-
-      <div>
-        <h4 className="text-xl font-semibold">Assigned Tasks</h4>
-        <ul className="list-disc pl-6">
-          {tasks.map((task, index) => (
-            <li key={index}>
-              {task.taskName} - Assigned to: {task.assignedTo}
-            </li>
-          ))}
-        </ul>
-      </div>
+      </form>
     </div>
   );
 };

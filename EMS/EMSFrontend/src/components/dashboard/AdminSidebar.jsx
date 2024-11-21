@@ -4,7 +4,7 @@ import {
   FaBuilding,
   FaCalendarAlt,
   FaCogs,
-  FaMoneyBillWave,
+  FaClipboardList,
   FaTachometerAlt,
   FaUsers,
 } from "react-icons/fa";
@@ -17,7 +17,7 @@ const AdminSidebar = () => {
         <h3 className="text-2xl text-center font-bold text-[#F4F4F4]">ART Onboarding</h3>
       </div>
       {/* Padding below the title to push content down */}
-      <div className="px-4 py-4">
+      <div className="px-4 py-4 space-y-5"> {/* Slightly increased space-y from 4 to 5 */}
         <NavLink
           to="/admin-dashboard"
           className={({ isActive }) =>
@@ -81,7 +81,7 @@ const AdminSidebar = () => {
             } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
         >
-          <FaMoneyBillWave />
+          <FaClipboardList />
           <span>Onboarding</span>
         </NavLink>
         <NavLink

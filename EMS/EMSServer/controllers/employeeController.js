@@ -4,6 +4,7 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import path from "path";
 import Department from "../models/Department.js";
+import Onboarding from '../models/Onboarding.js';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -156,4 +157,46 @@ const fetchEmployeesByDepId = async (req, res) => {
   }
 }
 
-export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId };
+const getEmployeeTasks = async (req, res) => {
+  const employeeId = req.user.employeeId; // Get employeeId from the authenticated user (assumed to be attached via middleware)
+  try {
+    const employee = await Employee.findById(employeeId).populate('onboardingTasks.taskId');
+    if (!employee) {
+      return res.status(404).json({ success: false, error: "Employee not found" });
+    }
+    return res.status(200).json({ success: true, tasks: employee.onboardingTasks });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error: "Server error" });
+  }
+};
+
+const assignOnboardingTask = async (req, res) => {
+  const { employeeId, taskId } = req.body; // taskId is from the Onboarding collection
+  try {
+    // Find the employee by ID
+    const employee = await Employee.findById(employeeId);
+    if (!employee) {
+      return res.status(404).json({ success: false, error: "Employee not found" });
+    }
+
+    // Find the onboarding task by taskId
+    const task = await Onboarding.findById(taskId);
+    if (!task) {
+      return res.status(404).json({ success: false, error: "Onboarding task not found" });
+    }
+
+    // Add task to employee's onboardingTasks array
+    employee.onboardingTasks.push({ taskId: task._id, taskName: task.taskName, dueDate: task.dueDate });
+    await employee.save();
+
+    return res.status(200).json({ success: true, message: "Task assigned successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error: "Server error in assigning task" });
+  }
+};
+
+
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId, getEmployeeTasks, assignOnboardingTask };

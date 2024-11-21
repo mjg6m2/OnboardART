@@ -9,10 +9,10 @@ import {
   FaTimesCircle,
   FaUsers,
 } from "react-icons/fa";
-import axios from 'axios'
+import axios from 'axios';
 
 const AdminSummary = () => {
-  const [summary, setSummary] = useState(null)
+  const [summary, setSummary] = useState(null);
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -21,27 +21,28 @@ const AdminSummary = () => {
           headers : {
             "Authorization" : `Bearer ${localStorage.getItem('token')}`
           }
-        })
-        console.log(summary.data)
-        setSummary(summary.data)
+        });
+        console.log(summary.data);
+        setSummary(summary.data);
       } catch(error) {
         if(error.response) {
-          alert(error.response.data.error)
+          alert(error.response.data.error);
         }
-        console.log(error.messsage)
+        console.log(error.message);
       }
-    }
-    fetchSummary()
-  }, [])
+    };
+    fetchSummary();
+  }, []);
 
-  if(!summary) {
-    return <div className="flex justify-center items-center h-screen bg-[#F4F2F8]">
-    <div className="flex flex-col items-center">
-      <div className="spinner-border animate-spin h-8 w-8 border-4 border-t-[#58536E] border-[#F4F2F8] rounded-full mb-4"></div>
-      <p className="text-xl font-semibold text-[#58536E]">Loading...</p>
-    </div>
-  </div>
-  
+  if (!summary) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-[#F4F2F8]">
+        <div className="flex flex-col items-center">
+          <div className="spinner-border animate-spin h-8 w-8 border-4 border-t-[#58536E] border-[#F4F2F8] rounded-full mb-4"></div>
+          <p className="text-xl font-semibold text-[#58536E]">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
