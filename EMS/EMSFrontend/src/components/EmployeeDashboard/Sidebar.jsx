@@ -14,18 +14,19 @@ const Sidebar = () => {
   const { user } = useAuth();
 
   return (
-    <div className="bg-[#58536E] text-white h-screen fixed left-0 top-0 bottom-0 space-y-2 w-64">
-      {/* Added margin-top to push the line down */}
-      <div className="bg-[#58536E] h-14 lex items-center justify-center border-b-2 border-[#D1D3D8] mt-2">
-        <h3 className="text-2xl text-center font-pacific">ART Onboarding</h3>
+    <div className="bg-[#4B4E6D] text-[#F4F4F4] h-screen fixed left-0 top-0 bottom-0 w-64 shadow-md">
+      <div className="bg-[#4B4E6D] h-16 flex items-center justify-center border-b-2 border-[#B8C0D6]">
+        <h3 className="text-2xl text-center font-bold text-[#F4F4F4]">ART Onboarding</h3>
       </div>
-      <div className="px-4 py-4">
+      <div className="px-4 py-4 space-y-5">
         <NavLink
           to="/employee-dashboard"
           className={({ isActive }) =>
             `${
-              isActive ? "bg-[#4A61C1]" : " "
-            } flex items-center space-x-4 block py-2.5 px-4 rounded`
+              isActive
+                ? "bg-[#B8C0D6] text-[#4B4E6D]"
+                : "text-[#F4F4F4]"
+            } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
           end
         >
@@ -36,8 +37,10 @@ const Sidebar = () => {
           to={`/employee-dashboard/profile/${user._id}`}
           className={({ isActive }) =>
             `${
-              isActive ? "bg-[#4A61C1]" : " "
-            } flex items-center space-x-4 block py-2.5 px-4 rounded`
+              isActive
+                ? "bg-[#B8C0D6] text-[#4B4E6D]"
+                : "text-[#F4F4F4]"
+            } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
         >
           <FaUsers />
@@ -47,8 +50,10 @@ const Sidebar = () => {
           to={`/employee-dashboard/leaves/${user._id}`}
           className={({ isActive }) =>
             `${
-              isActive ? "bg-[#4A61C1]" : " "
-            } flex items-center space-x-4 block py-2.5 px-4 rounded`
+              isActive
+                ? "bg-[#B8C0D6] text-[#4B4E6D]"
+                : "text-[#F4F4F4]"
+            } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
         >
           <FaBuilding />
@@ -58,8 +63,10 @@ const Sidebar = () => {
           to={`/employee-dashboard/onboarding-tasks`}
           className={({ isActive }) =>
             `${
-              isActive ? "bg-[#4A61C1]" : " "
-            } flex items-center space-x-4 block py-2.5 px-4 rounded`
+              isActive
+                ? "bg-[#B8C0D6] text-[#4B4E6D]"
+                : "text-[#F4F4F4]"
+            } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
         >
           <FaClipboardList />
@@ -69,8 +76,10 @@ const Sidebar = () => {
           to="/employee-dashboard/setting"
           className={({ isActive }) =>
             `${
-              isActive ? "bg-[#4A61C1]" : " "
-            } flex items-center space-x-4 block py-2.5 px-4 rounded`
+              isActive
+                ? "bg-[#B8C0D6] text-[#4B4E6D]"
+                : "text-[#F4F4F4]"
+            } flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-[#B8C0D6] hover:text-[#4B4E6D]`
           }
         >
           <FaCogs />

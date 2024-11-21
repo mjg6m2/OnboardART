@@ -131,9 +131,11 @@ const Add = () => {
               required
             >
               <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Non-Binary">Non-binary</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
@@ -150,8 +152,9 @@ const Add = () => {
               required
             >
               <option value="">Select Status</option>
-              <option value="single">Single</option>
-              <option value="married">Married</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Complicated">It's Complicated...</option>
             </select>
           </div>
 

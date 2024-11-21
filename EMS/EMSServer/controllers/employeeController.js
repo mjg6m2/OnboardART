@@ -197,6 +197,19 @@ const assignOnboardingTask = async (req, res) => {
   }
 };
 
+const deleteEmployee = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const employee = await Employee.findByIdAndDelete(id);
+    if (!employee) {
+      return res.status(404).json({ success: false, error: 'Employee not found' });
+    }
+    res.status(200).json({ success: true, message: 'Employee deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
 
 
-export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId, getEmployeeTasks, assignOnboardingTask };
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId, getEmployeeTasks, assignOnboardingTask, deleteEmployee };

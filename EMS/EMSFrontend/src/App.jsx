@@ -20,7 +20,8 @@ import AddLeave from './components/leave/Add'
 import Setting from "./components/EmployeeDashboard/Setting";
 import Table from "./components/leave/Table";
 import Detail from "./components/leave/Detail";
-import OnboardingTasks from './components/onboarding/OnboardingTasks'; // Import OnboardingTasks component
+import OnboardingTasks from './components/onboarding/OnboardingTasks';
+import EmployeeOnboarding from './components/onboarding/EmployeeOnboarding';
 
 function App() {
   return (
@@ -99,6 +100,7 @@ function App() {
           <Route path="/employee-dashboard/add-leave" element={<AddLeave />}></Route>
           <Route path="/employee-dashboard/salary/:id" element={<ViewSalary />}></Route>
           <Route path="/employee-dashboard/setting" element={<Setting />}></Route>
+          <Route path="onboarding-tasks" element={<EmployeeOnboarding />} />
 
         </Route>
       </Routes>

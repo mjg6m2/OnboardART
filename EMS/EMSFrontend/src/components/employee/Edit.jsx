@@ -26,7 +26,7 @@ const Edit = () => {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const responnse = await axios.get(
+        const response = await axios.get(
           `http://localhost:3000/api/employee/${id}`,
           {
             headers: {
@@ -34,15 +34,15 @@ const Edit = () => {
             },
           }
         );
-        if (responnse.data.success) {
-          const employee = responnse.data.employee;
+        if (response.data.success) {
+          const employee = response.data.employee;
           setEmployee((prev) => ({
             ...prev,
             name: employee.userId.name,
             maritalStatus: employee.maritalStatus,
             designation: employee.designation,
             salary: employee.salary,
-            department: employee.department
+            department: employee.department,
           }));
         }
       } catch (error) {
@@ -79,6 +79,28 @@ const Edit = () => {
     } catch (error) {
       if (error.response && !error.response.data.success) {
         alert(error.response.data.error);
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/api/employee/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        if (response.data.success) {
+          navigate("/admin-dashboard/employees");
+        }
+      } catch (error) {
+        if (error.response && !error.response.data.success) {
+          alert(error.response.data.error);
+        }
       }
     }
   };
@@ -179,22 +201,30 @@ const Edit = () => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Edit Employee
-            </button>
+            <div className="flex justify-between mt-6">
+              <button
+                type="submit"
+                className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Edit Employee
+              </button>
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Delete Employee
+              </button>
+            </div>
           </form>
         </div>
       ) : (
         <div className="flex justify-center items-center h-screen bg-[#F4F2F8]">
-  <div className="flex flex-col items-center">
-    <div className="spinner-border animate-spin h-8 w-8 border-4 border-t-[#58536E] border-[#F4F2F8] rounded-full mb-4"></div>
-    <p className="text-xl font-semibold text-[#58536E]">Loading...</p>
-  </div>
-</div>
-
+          <div className="flex flex-col items-center">
+            <div className="spinner-border animate-spin h-8 w-8 border-4 border-t-[#58536E] border-[#F4F2F8] rounded-full mb-4"></div>
+            <p className="text-xl font-semibold text-[#58536E]">Loading...</p>
+          </div>
+        </div>
       )}
     </>
   );
